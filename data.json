@@ -24,7 +24,7 @@
     { "name": "Mornye", "element": "Fusion", "weaponType": "Broadblade", "role": "Support", "sequence": "S0", "weapon": "Discord", "weaponRank": "R1", "echoSet": "Halo of Starry Radiance 5/5", "level": 90, "notes": "" },
     { "name": "Chisa", "element": "Havoc", "weaponType": "Sword", "role": "Support", "sequence": "S0", "weapon": "Kumokiri", "weaponRank": "R1", "echoSet": "Thread of Severed Fate 3 + Havoc Eclipse 2", "level": 90, "notes": "" },
     { "name": "Roccia", "element": "Havoc", "weaponType": "Gauntlets", "role": "Support", "sequence": "S0", "weapon": "Tragicomedy", "weaponRank": "R1", "echoSet": "Midnight Veil 5/5", "level": 90, "notes": "Weapon Lv86" },
-    { "name": "Shorekeeper", "element": "Spectro", "weaponType": "Rectifier", "role": "Support", "sequence": "S1", "weapon": "Stellar Symphony", "weaponRank": "R1", "echoSet": "Rejuvenating Glow 5/5", "level": 90, "notes": "" }
+    { "name": "Shorekeeper", "element": "Spectro", "weaponType": "Rectifier", "role": "Support", "sequence": "S2", "weapon": "Stellar Symphony", "weaponRank": "R1", "echoSet": "Rejuvenating Glow 5/5", "level": 90, "notes": "" }
   ],
   "audit": [
     {
@@ -243,12 +243,12 @@
   "teams": [
     { "name": "Fusion Alpha", "members": ["Aemeath S3", "Lynae S2", "Mornye S0"] },
     { "name": "Fusion Beta", "members": ["Changli S0", "Lupa S0", "Encore"] },
-    { "name": "Glacio/Spectro", "members": ["Carlotta S3", "Zhezhi S0", "Shorekeeper S1"] },
+    { "name": "Glacio/Spectro", "members": ["Carlotta S3", "Zhezhi S0", "Shorekeeper S2"] },
     { "name": "Aero", "members": ["Cartethyia S3", "Ciaccona S0", "Chisa S0"] },
     { "name": "Havoc Triangle", "members": ["Phrolova S2", "Cantarella S3", "Roccia S0"] },
-    { "name": "Spectro", "members": ["Jinhsi S0", "Phoebe S1", "TBD"] },
-    { "name": "Spectro Alt", "members": ["Zani S0", "Phoebe S1", "TBD"] },
-    { "name": "Electro", "members": ["Augusta S0", "Iuno S1", "TBD"] }
+    { "name": "Spectro (Jinhsi)", "members": ["Jinhsi S0", "Zhezhi S0", "Shorekeeper S2"] },
+    { "name": "Spectro (Zani)", "members": ["Zani S0", "Phoebe S1", "Shorekeeper S2"] },
+    { "name": "Electro", "members": ["Augusta S0", "Iuno S1", "Shorekeeper S2"] }
   ],
   "actionItems": [
     { "task": "Augusta CR Substats", "detail": "Farm echoes with CR subs (53.3% \u2192 70%+)", "status": "red" },

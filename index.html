@@ -93,11 +93,14 @@
   .weapon-text{font-size:10px;color:#7b8fa8;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .echo-text{font-size:10px;color:#607080;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
-  .res-portrait{width:52px;height:52px;border-radius:10px;object-fit:cover;flex-shrink:0;border:2px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s}
-  .res-row:hover .res-portrait{border-color:rgba(94,234,212,0.3);transform:scale(1.08);box-shadow:0 0 12px rgba(94,234,212,0.15)}
+  .res-portrait{width:62px;height:62px;border-radius:10px;object-fit:cover;flex-shrink:0;border:2px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s}
+  .res-row:hover .res-portrait{border-color:rgba(94,234,212,0.3);transform:scale(1.06);box-shadow:0 0 12px rgba(94,234,212,0.15)}
+  .detail-portrait{width:80px;height:80px;border-radius:12px;object-fit:cover;flex-shrink:0;border:2px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);box-shadow:0 0 16px rgba(94,234,212,0.1)}
 
   /* Detail panel */
-  .detail-panel{padding:12px 16px 16px;background:rgba(94,234,212,0.02);border-bottom:1px solid rgba(255,255,255,0.04);animation:fadeSlideIn 0.25s ease-out}
+  .detail-panel{padding:14px 16px 16px;background:rgba(94,234,212,0.02);border-bottom:1px solid rgba(255,255,255,0.04);animation:fadeSlideIn 0.25s ease-out;display:flex;gap:16px;align-items:flex-start}
+  .detail-left{flex-shrink:0}
+  .detail-right{flex:1;min-width:0}
   .detail-top{display:flex;align-items:center;gap:16px;margin-bottom:10px;flex-wrap:wrap}
   .build-type{font-size:11px;font-weight:700;color:var(--accent);letter-spacing:0.8px;text-transform:uppercase}
   .detail-notes{font-size:11px;color:var(--text-muted);font-style:italic}
@@ -130,24 +133,27 @@
   .bench-conditions{padding:12px 16px;background:rgba(255,255,255,0.02);border-radius:10px;margin-bottom:16px;font-size:11px;color:var(--text-muted);line-height:1.6}
   .bench-table{width:100%;border-collapse:collapse;margin-bottom:24px}
   .bench-table th{text-align:left;padding:10px 12px;font-size:11px;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase;border-bottom:2px solid rgba(94,234,212,0.15)}
-  .bench-table td{padding:10px 12px;font-size:12px;border-bottom:1px solid rgba(255,255,255,0.03);vertical-align:middle}
+  .bench-table td{padding:12px 12px;font-size:12px;border-bottom:1px solid rgba(255,255,255,0.03);vertical-align:middle}
   .bench-table tr:hover td{background:rgba(94,234,212,0.03)}
   .bench-table .rank-top{background:rgba(94,234,212,0.06)}
   .bench-table .rank-bottom{background:rgba(198,40,40,0.04)}
   .bench-rank{font-weight:900;font-size:16px;color:var(--accent);width:40px}
-  .bench-team-cell{display:flex;align-items:center;gap:6px}
-  .bench-portrait{width:28px;height:28px;border-radius:6px;object-fit:cover;border:1px solid rgba(255,255,255,0.08)}
+  .bench-team-cell{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .bench-portrait{width:44px;height:44px;border-radius:8px;object-fit:cover;border:2px solid rgba(255,255,255,0.08);transition:border-color 0.2s}
+  .bench-table tr:hover .bench-portrait{border-color:rgba(94,234,212,0.25)}
+  .bench-team-names{font-size:12px;color:var(--text-secondary);font-weight:600}
   .bench-avg{font-weight:800;color:var(--text-primary);font-size:14px}
   .bench-spread{font-size:11px;color:var(--text-muted)}
   .bench-notes{font-size:11px;color:var(--text-secondary);max-width:250px}
 
-  .team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;margin-bottom:24px}
-  .team-card{padding:12px 14px;background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:10px;transition:background 0.2s}
+  .team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;margin-bottom:24px}
+  .team-card{padding:16px 18px;background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:12px;transition:background 0.2s}
   .team-card:hover{background:rgba(94,234,212,0.03)}
-  .team-name{font-size:12px;font-weight:800;color:var(--accent);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
-  .team-members{display:flex;gap:8px;align-items:center}
-  .team-member{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--text-secondary)}
-  .team-member-portrait{width:24px;height:24px;border-radius:5px;object-fit:cover;border:1px solid rgba(255,255,255,0.08)}
+  .team-name{font-size:13px;font-weight:800;color:var(--accent);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px}
+  .team-members{display:flex;gap:14px;align-items:center}
+  .team-member{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--text-secondary)}
+  .team-member-portrait{width:48px;height:48px;border-radius:10px;object-fit:cover;border:2px solid rgba(255,255,255,0.08);transition:border-color 0.2s}
+  .team-card:hover .team-member-portrait{border-color:rgba(94,234,212,0.2)}
 
   .action-list{display:flex;flex-direction:column;gap:6px;margin-bottom:24px}
   .action-item{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:8px;border-left:3px solid #444}
@@ -182,7 +188,8 @@
   @media(max-width:700px){
     .res-row{grid-template-columns:1fr auto auto;gap:8px}
     .res-row .weapon-text,.res-row .echo-text{display:none}
-    .res-portrait{width:40px;height:40px}
+    .res-portrait{width:46px;height:46px}
+    .detail-portrait{width:60px;height:60px}
     .stats-grid{grid-template-columns:repeat(2,1fr)}
     .bench-table{font-size:11px}
     .bench-notes{display:none}
@@ -213,7 +220,7 @@
 </div>
 
 <script>
-var PORTRAIT_MAP={"Aemeath":"aemeath.png","Carlotta":"Carlotta.png","Cartethyia":"Cartethya.png","Phrolova":"Phrolova.png","Augusta":"augusta.png","Jinhsi":"jinhsi.png","Changli":"ChangLi.png","Zani":"zani.png","Iuno":"iuno.png","Lynae":"lynae.png","Cantarella":"cantarella.png","Phoebe":"Phoebe.png","Ciaccona":"ciaccona.png","Lupa":"lupa.png","Zhezhi":"zhezhi.png","Mornye":"mornye.png","Chisa":"chisa.png","Roccia":"roccia.png","Shorekeeper":"Shorekeeper.png","Nyx":"","Encore":""};
+var PORTRAIT_MAP={"Aemeath":"aemeath.png","Carlotta":"Carlotta.png","Cartethyia":"Cartethya.png","Phrolova":"Phrolova.png","Augusta":"augusta.png","Jinhsi":"jinhsi.png","Changli":"ChangLi.png","Zani":"zani.png","Iuno":"iuno.png","Lynae":"lynae.png","Cantarella":"cantarella.png","Phoebe":"Phoebe.png","Ciaccona":"ciaccona.png","Lupa":"lupa.png","Zhezhi":"zhezhi.png","Mornye":"mornye.png","Chisa":"chisa.png","Roccia":"roccia.png","Shorekeeper":"Shorekeeper.png","Nyx":"rover_spectro.png","Encore":"encore.png"};
 var ELEM_COLORS={Fusion:{color:"#ff6b35",bg:"rgba(255,107,53,0.15)"},Glacio:{color:"#38bdf8",bg:"rgba(56,189,248,0.15)"},Aero:{color:"#34d399",bg:"rgba(52,211,153,0.15)"},Havoc:{color:"#c084fc",bg:"rgba(192,132,252,0.15)"},Electro:{color:"#facc15",bg:"rgba(250,204,21,0.15)"},Spectro:{color:"#f9a8d4",bg:"rgba(249,168,212,0.15)"}};
 var ROLES=["Main DPS","Sub-DPS","Support"];
 var ROLE_ICONS={"Main DPS":"\u2694\uFE0F","Sub-DPS":"\uD83D\uDDE1\uFE0F","Support":"\uD83D\uDC9A"};
@@ -345,7 +352,7 @@ function renderRoster(){
         var isExp=expandedRes.has(res.name);
         var row=e('div',{class:"res-row elem-"+res.element+"-row"+(isExp?" expanded-row":""),onClick:function(){isExp?expandedRes.delete(res.name):expandedRes.add(res.name);renderRoster()}},
           e('div',{class:'res-info'},
-            makePortrait(res.name,res.element,52,'res-portrait'),
+            makePortrait(res.name,res.element,62,'res-portrait'),
             e('span',{class:'res-name'},res.name),
             e('span',{class:"elem-chip elem-"+res.element},e('img',{src:"Portraits/element_"+res.element.toLowerCase()+".png",alt:res.element}),res.element)
           ),
@@ -358,9 +365,11 @@ function renderRoster(){
         if(isExp){
           var audit=AUDIT.find(function(a){return a.name===res.name});
           var panel=e('div',{class:'detail-panel'});
+          var detailLeft=e('div',{class:'detail-left'},makePortrait(res.name,res.element,80,'detail-portrait'));
+          var detailRight=e('div',{class:'detail-right'});
           if(audit){
             var ps=audit._calcPriority;
-            panel.appendChild(e('div',{class:'detail-top'},
+            detailRight.appendChild(e('div',{class:'detail-top'},
               e('span',{class:'build-type'},audit.buildType),
               e('span',{class:"priority-badge priority-"+ps},ps.toUpperCase()),
               audit.notes?e('span',{class:'detail-notes'},audit.notes):null
@@ -376,19 +385,20 @@ function renderRoster(){
               cell.appendChild(e('div',{class:'stat-optimal'},"Target: "+stat.optimal));
               grid.appendChild(cell);
             });
-            panel.appendChild(grid);
+            detailRight.appendChild(grid);
           }else{
-            panel.appendChild(e('div',{class:'detail-notes'},'No audit data for this resonator'));
+            detailRight.appendChild(e('div',{class:'detail-notes'},'No audit data for this resonator'));
           }
           var bestBench=null;
           BENCH.forEach(function(b){if(b.team.indexOf(res.name)>=0){if(!bestBench||parseFloat(b.average)<parseFloat(bestBench.average))bestBench=b}});
           if(bestBench){
-            panel.appendChild(e('div',{class:'benchmark-inline'},
+            detailRight.appendChild(e('div',{class:'benchmark-inline'},
               e('span',{class:'bench-time'},bestBench.average),
               e('span',{class:'bench-team'},'with '+bestBench.team.filter(function(n){return n!==res.name}).join(' + ')),
               e('span',{style:'color:var(--text-muted);font-size:10px'},bestBench.notes)
             ));
           }
+          panel.appendChild(detailLeft);panel.appendChild(detailRight);
           body.appendChild(panel);
         }
       });
@@ -429,8 +439,8 @@ function renderBenchmarks(){
     var tr=e('tr',{class:cls});
     tr.appendChild(e('td',{class:'bench-rank'},String(b.rank)));
     var teamCell=e('td');var teamDiv=e('div',{class:'bench-team-cell'});
-    b.team.forEach(function(name){teamDiv.appendChild(makePortrait(name,getElem(name),28,'bench-portrait'));});
-    teamDiv.appendChild(e('span',{style:'font-size:11px;color:var(--text-secondary);margin-left:4px'},b.team.join(' / ')));
+    b.team.forEach(function(name){teamDiv.appendChild(makePortrait(name,getElem(name),44,'bench-portrait'));});
+    teamDiv.appendChild(e('span',{class:'bench-team-names'},b.team.join(' / ')));
     teamCell.appendChild(teamDiv);tr.appendChild(teamCell);
     tr.appendChild(e('td',{style:'font-size:11px;color:var(--text-muted)'},b.element));
     tr.appendChild(e('td',{style:'color:var(--text-secondary)'},b.best));
@@ -450,7 +460,7 @@ function renderBenchmarks(){
       var members=e('div',{class:'team-members'});
       t.members.forEach(function(m){
         var name=m.replace(/ S\d+$/,'');var elem=getElem(name);
-        members.appendChild(e('div',{class:'team-member'},makePortrait(name,elem,24,'team-member-portrait'),m));
+        members.appendChild(e('div',{class:'team-member'},makePortrait(name,elem,48,'team-member-portrait'),m));
       });
       card.appendChild(members);grid.appendChild(card);
     });
