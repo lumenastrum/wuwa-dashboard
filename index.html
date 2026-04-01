@@ -206,8 +206,8 @@
     </div>
     <div style="display:flex;align-items:center;gap:4px">
       <div class="tabs">
-        <button class="tab active" onclick="switchTab('roster')">Resonator Roster</button>
-        <button class="tab" onclick="switchTab('benchmarks')">Benchmarks & Account</button>
+        <button class="tab active" data-tab="roster" onclick="switchTab('roster')">Resonator Roster</button>
+        <button class="tab" data-tab="benchmarks" onclick="switchTab('benchmarks')">Benchmarks & Account</button>
       </div>
       <button class="export-btn" id="export-btn" onclick="exportData()" title="Export updated data.json">EXPORT</button>
     </div>
@@ -227,6 +227,7 @@ var ROLE_ICONS={"Main DPS":"\u2694\uFE0F","Sub-DPS":"\uD83D\uDDE1\uFE0F","Suppor
 var ELEMENTS=["Fusion","Glacio","Aero","Havoc","Electro","Spectro"];
 
 var RES=[],AUDIT=[],BENCH=[],BENCH_META={},TEAMS=[],ACTIONS=[],FINDINGS=[],META={};
+var ELEM_BY_NAME={};
 var isDirty=false,currentTab="roster",roleFilter="ALL",elemFilter="ALL";
 var expandedSections=new Set(ROLES),expandedRes=new Set();
 var benchSections={teams:false,actions:false,findings:false};
@@ -263,6 +264,7 @@ async function loadData(){
     BENCH=data.benchmarks||[];BENCH_META=data.benchmarkMeta||{};
     TEAMS=data.teams||[];ACTIONS=data.actionItems||[];FINDINGS=data.keyFindings||[];
 
+    ELEM_BY_NAME={};RES.forEach(function(r){ELEM_BY_NAME[r.name]=r.element});
     var updStr=META.updated||'N/A';var rel=updStr;
     try{var d=new Date(updStr+'T00:00:00');var diff=Math.floor((new Date()-d)/(864e5));
       if(diff===0)rel='today';else if(diff===1)rel='yesterday';else if(diff<7)rel=diff+' days ago';
@@ -291,7 +293,7 @@ function updateExportBtn(){
 
 function switchTab(tab){
   currentTab=tab;
-  document.querySelectorAll('.tab').forEach(function(t){t.classList.toggle('active',t.textContent.toLowerCase().indexOf(tab.slice(0,5))>=0)});
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.toggle('active',t.getAttribute('data-tab')===tab)});
   document.getElementById('roster-view').classList.toggle('hidden',tab!=='roster');
   document.getElementById('bench-view').classList.toggle('hidden',tab!=='benchmarks');
   renderFilters();if(tab==='benchmarks')renderBenchmarks();
@@ -313,19 +315,24 @@ function renderFilters(){
   });
 }
 
-function renderRoster(){
-  var c=document.getElementById('roster-view');c.innerHTML='';
+function renderSummaryBar(){
   AUDIT.forEach(function(a){a.stats.forEach(function(s){s._status=getStatStatus(s)});a._calcPriority=recalcPriority(a)});
-
   var done=AUDIT.filter(function(a){return a._calcPriority==="green"}).length;
   var mid=AUDIT.filter(function(a){return a._calcPriority==="yellow"}).length;
   var crit=AUDIT.filter(function(a){return a._calcPriority==="red"}).length;
+  var bar=document.getElementById('summary-bar');
+  if(!bar){bar=e('div',{class:'summary-bar',id:'summary-bar'});var c=document.getElementById('roster-view');if(c.firstChild)c.insertBefore(bar,c.firstChild);else c.appendChild(bar)}
+  bar.innerHTML='';
+  bar.appendChild(e('div',{class:'summary-card',style:'background:var(--green-bg);border:1px solid rgba(46,125,50,0.2)'},e('div',{class:'summary-num',style:'color:var(--green-text)'},String(done)),e('div',{class:'summary-label',style:'color:rgba(102,187,106,0.7)'},'Perfect')));
+  bar.appendChild(e('div',{class:'summary-card',style:'background:var(--yellow-bg);border:1px solid rgba(255,160,0,0.15)'},e('div',{class:'summary-num',style:'color:var(--yellow-text)'},String(mid)),e('div',{class:'summary-label',style:'color:rgba(255,183,77,0.7)'},'Needs Work')));
+  bar.appendChild(e('div',{class:'summary-card',style:'background:var(--red-bg);border:1px solid rgba(198,40,40,0.2)'},e('div',{class:'summary-num',style:'color:var(--red-text)'},String(crit)),e('div',{class:'summary-label',style:'color:rgba(239,83,80,0.7)'},'Critical')));
+}
 
-  c.appendChild(e('div',{class:'summary-bar'},
-    e('div',{class:'summary-card',style:'background:var(--green-bg);border:1px solid rgba(46,125,50,0.2)'},e('div',{class:'summary-num',style:'color:var(--green-text)'},String(done)),e('div',{class:'summary-label',style:'color:rgba(102,187,106,0.7)'},'Perfect')),
-    e('div',{class:'summary-card',style:'background:var(--yellow-bg);border:1px solid rgba(255,160,0,0.15)'},e('div',{class:'summary-num',style:'color:var(--yellow-text)'},String(mid)),e('div',{class:'summary-label',style:'color:rgba(255,183,77,0.7)'},'Needs Work')),
-    e('div',{class:'summary-card',style:'background:var(--red-bg);border:1px solid rgba(198,40,40,0.2)'},e('div',{class:'summary-num',style:'color:var(--red-text)'},String(crit)),e('div',{class:'summary-label',style:'color:rgba(239,83,80,0.7)'},'Critical'))
-  ));
+function renderRoster(){
+  var c=document.getElementById('roster-view');
+  var bar=document.getElementById('summary-bar');
+  c.innerHTML='';if(bar)c.appendChild(bar);
+  renderSummaryBar();
 
   var filtered=RES.filter(function(a){
     if(roleFilter!=="ALL"&&a.role!==roleFilter)return false;
@@ -420,7 +427,7 @@ function startEdit(resName,statIdx,cell,valEl){
 function finishEdit(resName,statIdx,rawVal){
   var audit=AUDIT.find(function(a){return a.name===resName});if(!audit)return;
   var stat=audit.stats[statIdx];var cleaned=rawVal.replace(/[,%]/g,'').trim();var num=parseFloat(cleaned);
-  if(!isNaN(num)){stat.current=stat.unit==='%'?num+'%':(num>=1000?num.toLocaleString():String(num));markDirty()}
+  if(!isNaN(num)){stat.current=stat.unit==='%'?num+'%':(num>=1000?num.toLocaleString():String(num));markDirty();renderSummaryBar()}
   renderRoster();
 }
 
@@ -497,7 +504,7 @@ function renderCollapsible(parent,key,label,renderFn){
   parent.appendChild(wrap);
 }
 
-function getElem(name){var r=RES.find(function(a){return a.name===name});return r?r.element:"Spectro"}
+function getElem(name){return ELEM_BY_NAME[name]||"Spectro"}
 
 loadData();
 </script>
