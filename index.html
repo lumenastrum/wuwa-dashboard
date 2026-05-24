@@ -581,10 +581,11 @@ function renderBenchmarks(){
   });
 }
 
-function renderCollapsible(parent,key,label,renderFn){
+function renderCollapsible(parent,key,label,renderFn,rerender){
   var isOpen=benchSections[key];
   var wrap=e('div');
-  wrap.appendChild(e('button',{class:"collapsible-toggle "+(isOpen?'expanded':'collapsed'),onClick:function(){benchSections[key]=!benchSections[key];renderBenchmarks()}},
+  var refresh=rerender||renderBenchmarks;
+  wrap.appendChild(e('button',{class:"collapsible-toggle "+(isOpen?'expanded':'collapsed'),onClick:function(){benchSections[key]=!benchSections[key];refresh()}},
     e('span',{class:'collapsible-label'},label),
     e('span',{class:"section-chevron"+(isOpen?" open":""),style:'margin-left:auto'},'\u25bc')
   ));
@@ -741,7 +742,7 @@ function renderMatrix(){
       cyc.lessons.forEach(function(lesson){
         body.appendChild(e('div',{class:'mx-lesson'},lesson));
       });
-    });
+    },renderMatrix);
   }
 }
 
